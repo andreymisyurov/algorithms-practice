@@ -1,0 +1,59 @@
+# General
+*.log
+*.tmp
+*.swp
+*.DS_Store
+Thumbs.db
+
+# Compiled files
+*.o
+*.obj
+*.out
+*.exe
+*.dll
+*.so
+*.dylib
+
+# C++ specific
+*.a
+*.lib
+*.lo
+*.lai
+*.gch
+*.pch
+*.d
+*.dep
+*.cmd
+*.vcxproj*
+*.sln
+
+# Python specific
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+env/
+venv/
+ENV/
+*.egg-info/
+*.eggs
+pip-log.txt
+
+# Go specific
+*.exe
+*.test
+*.out
+*.a
+*.o
+
+# Dependencies
+vendor/
+go.sum
+go.mod
+
+# Editor and OS-specific files
+.idea/
+.vscode/
+*.iml
+*.ipynb_checkpoints
+
