@@ -89,6 +89,19 @@ public:
         delete rm_node;
         return dummy.next;
     }
+
+    ListNode* reverse() {
+        ListNode* curr = m_head;
+        ListNode* prev = nullptr;
+        for(;curr;) {
+            ListNode* next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        m_head = prev;
+        return prev;
+    }
 };
 
 int main() {
@@ -102,5 +115,6 @@ int main() {
     list.add_node(7);
     list.print();
     list.removeNodeFromEnd((size_t)7);
+    list.reverse();
     list.print();
 }
