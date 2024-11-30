@@ -49,6 +49,14 @@ public:
         std::cout << "NULL" << std::endl;
     }
 
+    static void print(ListNode* tmp) {
+        for(;tmp;) {
+            std::cout << tmp->val << " -> ";
+            tmp = tmp->next;
+        }
+        std::cout << "NULL" << std::endl;
+    }
+
     ListNode* removeNodeFromEnd(int in_n) {
         ListNode dummy(0);
         dummy.next = m_head;
@@ -102,6 +110,21 @@ public:
         m_head = prev;
         return prev;
     }
+
+    ListNode* middle_node() {
+        ListNode* fast = m_head;
+        ListNode* slow = m_head;
+        for(;fast->next;) {
+            slow = slow->next;
+            fast = fast->next;
+            if (fast->next)
+                fast = fast->next;
+            else
+                break;
+        }
+
+        return slow;
+    }
 };
 
 int main() {
@@ -109,12 +132,12 @@ int main() {
     list.add_node(1);
     list.add_node(2);
     list.add_node(3);
-    list.add_node(4);
-    list.add_node(5);
-    list.add_node(6);
-    list.add_node(7);
+    // list.add_node(4);
+    // list.add_node(5);
+    // list.add_node(6);
+    // list.add_node(7);
     list.print();
-    list.removeNodeFromEnd((size_t)7);
-    list.reverse();
-    list.print();
+    list.print(list.middle_node());
+    // list.removeNodeFromEnd((size_t)7);
+    // list.reverse();
 }
