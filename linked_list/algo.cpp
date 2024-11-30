@@ -111,6 +111,17 @@ public:
         return prev;
     }
 
+    ListNode* reverse(ListNode* curr) {
+        ListNode* prev = nullptr;
+        for(;curr;) {
+            ListNode* next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+
     ListNode* middle_node() {
         ListNode* fast = m_head;
         ListNode* slow = m_head;
@@ -125,6 +136,18 @@ public:
 
         return slow;
     }
+
+    bool palindrom() {
+        ListNode* head = m_head;
+        ListNode* tail = reverse(middle_node());
+        for(;head && tail;) {
+            if (head->val != tail->val)
+                return false;
+            head = head->next;
+            tail = tail->next;
+        }
+        return true;
+    }
 };
 
 int main() {
@@ -132,12 +155,13 @@ int main() {
     list.add_node(1);
     list.add_node(2);
     list.add_node(3);
-    // list.add_node(4);
-    // list.add_node(5);
-    // list.add_node(6);
-    // list.add_node(7);
-    list.print();
-    list.print(list.middle_node());
+    list.add_node(4);
+    list.add_node(3);
+    list.add_node(2);
+    list.add_node(1);
+    std::cout << list.palindrom();
+    // list.print();
+    // list.print(list.reverse(list.middle_node()));
     // list.removeNodeFromEnd((size_t)7);
     // list.reverse();
 }
