@@ -156,7 +156,6 @@ public:
         return true;
     }
 
-// 1 2 3 4 5 6
     void reorder() {
         ListNode* middle = middle_node();
         ListNode* tail = reverse(middle->next);
@@ -192,24 +191,30 @@ public:
     }
 
     static ListNode* merge_k_lists(std::vector<ListNode*> data) {
-        ListNode dummy(0);
-        ListNode* tmp = &dummy;
-        int d = 15;
-        while(d) {
-            int min = INT32_MAX;
+    
+        auto get_min = [&data](){
             int min_i = -1;
-            for (int i = 0; i < data.size(); ++i) {
-                if (data[i] != nullptr && data[i]->val < min) {
+            int min = INT32_MAX;
+            for (int i = 0, len = data.size(); i < len; ++i) {
+                if (data[i] != nullptr && data[i]->val <= min) {
                     min = data[i]->val;
                     min_i = i;
                 }
             }
-            if (data[min_i]) {
-                tmp->next = data[min_i];
-                tmp = tmp->next;
-                data[min_i] = data[min_i]->next;
-            }
-            --d;
+            return min_i < 0 ? -1 : min_i;   
+        };
+
+        ListNode dummy(0);
+        ListNode* cur = &dummy;
+        
+        for(;;) {
+            int min_i = get_min();
+            if(min_i == -1)
+                break;
+
+            cur->next = data[min_i];
+            cur = cur->next;
+            data[min_i] = data[min_i]->next;
         }
         return dummy.next;
     }
@@ -245,7 +250,4 @@ int main() {
     vec.push_back(list3.get_head());
 
     LinkedList::print(LinkedList::merge_k_lists(vec));
-    // list.print(list.reverse(list.middle_node()));
-    // list.removeNodeFromEnd((size_t)7);
-    // list.reverse();
 }
